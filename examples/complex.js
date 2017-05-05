@@ -1,65 +1,85 @@
-/**
- * Sort prompt example
- */
+// 'use strict';
 
-"use strict";
-var inquirer = require("inquirer2")();
-inquirer.registerPrompt('sort', require('../'));
+// /**
+//  * Sort prompt example
+//  */
 
-var initialQuestions = [
-  {
-    name: "theme",
-    message: "Sort the themes into the order you prefer.",
-    choices: [
-      "Order a pizza",
-      "Make a reservation",
-      new inquirer.Separator(),
-      "Ask opening hours",
-      "Talk to the receptionnist"
-    ]
-  },
-  {
-    name: "size",
-    message: "Sort the sizes into the order you prefer.",
-    choices: [ "Jumbo", "Large", "Standard", "Medium", "Small", "Micro" ]
-  }
-];
+// var Enquirer = require('enquirer');
+// var enquirer = new Enquirer();
+// enquirer.register('sort', require('..'));
+// enquirer.question('colors', 'What are your favorite colors?', {
+//   type: 'checkbox',
+//   default: 'red',
+//   pointer: '♥',
+//   choices: [
+//     'red',
+//     'blue',
+//     'yellow'
+//   ]
+// });
 
-// first sort the choices in each question
-sortChoices(initialQuestions, function(sortedAnswers) {
+// enquirer.ask('colors')
+//   .then(function(answers) {
+//     console.log(answers)
+//   })
+//   .catch(function(err) {
+//     console.log(err)
+//   })
 
-  // build new questions based on the sorted answers
-  var questions = [];
-  questions.push({
-    name: 'theme',
-    message: 'What do you want to do?',
-    choices: sortedAnswers.theme
-  });
+// var initialQuestions = [
+//   {
+//     name: 'theme',
+//     message: 'Sort the themes into the order you prefer.',
+//     choices: [
+//       'Order a pizza',
+//       'Make a reservation',
+//       new inquirer.Separator(),
+//       'Ask opening hours',
+//       'Talk to the receptionnist'
+//     ]
+//   },
+//   {
+//     name: 'size',
+//     message: 'Sort the sizes into the order you prefer.',
+//     choices: [ 'Jumbo', 'Large', 'Standard', 'Medium', 'Small', 'Micro' ]
+//   }
+// ];
 
-  questions.push({
-    name: 'size',
-    message: 'What size do you need',
-    choices: sortedAnswers.size
-  });
+// // first sort the choices in each question
+// sortChoices(initialQuestions, function(sortedAnswers) {
 
-  // ask the questions using the sorted lists
-  displayChoices(questions, function(answers) {
-    console.log(JSON.stringify(answers, null, "  "));
-  });
-});
+//   // build new questions based on the sorted answers
+//   var questions = [];
+//   questions.push({
+//     name: 'theme',
+//     message: 'What do you want to do?',
+//     choices: sortedAnswers.theme
+//   });
 
-// set the question type to `sort` on each question and prompt the user to sort the choices.
-function sortChoices(questions, cb) {
-  inquirer.prompt(questions.map(function(question) {
-    question.type = 'sort';
-    return question;
-  }), cb);
-}
+//   questions.push({
+//     name: 'size',
+//     message: 'What size do you need',
+//     choices: sortedAnswers.size
+//   });
 
-// set the question type to `list` on each question and prompt the user to pick a choice.
-function displayChoices(questions, cb) {
-  inquirer.prompt(questions.map(function(question) {
-    question.type = 'list';
-    return question;
-  }), cb);
-}
+//   // ask the questions using the sorted lists
+//   displayChoices(questions, function(answers) {
+//     console.log(JSON.stringify(answers, null, '  '));
+//   });
+// });
+
+// // set the question type to `sort` on each question and prompt the user to sort the choices.
+// function sortChoices(questions, cb) {
+//   inquirer.prompt(questions.map(function(question) {
+//     question.type = 'sort';
+//     return question;
+//   }), cb);
+// }
+
+// // set the question type to `list` on each question and prompt the user to pick a choice.
+// function displayChoices(questions, cb) {
+//   inquirer.prompt(questions.map(function(question) {
+//     question.type = 'list';
+//     return question;
+//   }), cb);
+// }

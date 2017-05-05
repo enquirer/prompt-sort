@@ -20,14 +20,22 @@
     "test": "mocha"
   },
   "dependencies": {
-    "inquirer2": "github:jonschlinkert/inquirer2"
+    "ansi-bold": "^0.1.1",
+    "ansi-cyan": "^0.1.1",
+    "is-number": "^3.0.0",
+    "is-windows": "^1.0.1",
+    "prompt-list": "^0.2.0",
+    "readline-utils": "^0.1.5",
+    "terminal-paginator": "^0.2.1"
   },
   "devDependencies": {
     "ansi-colors": "^0.1.0",
-    "mocha": "*",
-    "should": "*"
+    "enquirer": "^0.4.1"
   },
-  "keywords": [],
+  "keywords": [
+    "prompt",
+    "sort"
+  ],
   "verb": {
     "related": {
       "list": [
