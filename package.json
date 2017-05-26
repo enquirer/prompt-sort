@@ -1,6 +1,6 @@
 {
   "name": "prompt-sort",
-  "description": "Create a prompt that allows sorting a list of values.",
+  "description": "Prompt that allows the user to re-order items in a list of choices.",
   "version": "0.1.0",
   "homepage": "https://github.com/enquirer/prompt-sort",
   "author": "Brian Woodward (https://github.com/doowb)",
@@ -40,7 +40,7 @@
   ],
   "verb": {
     "toc": false,
-    "layout": "default",
+    "layout": "common-minimal",
     "tasks": [
       "readme"
     ],
