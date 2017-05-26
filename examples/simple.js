@@ -1,28 +1,29 @@
 'use strict';
 
 var colors = require('ansi-colors');
-var Enquirer = require('enquirer');
-var enquirer = new Enquirer();
-
-enquirer.register('sort', require('..'));
-enquirer.question('colors', {
-  type: 'sort',
+var Prompt = require('..');
+var prompt = new Prompt({
   name: 'colors',
   message: 'Put the colors in order of most preferred to least.',
   choices: [
-    'black',
+    'cyan',
+    'gray',
     'blue',
     'green',
     'red',
     'white',
+    'magenta',
+    'dim',
     'yellow'
   ]
 });
 
-enquirer.ask('colors')
-  .then(function(answers) {
+prompt.run()
+  .then(function(answer) {
+    console.log(answer)
+    if (!answer) return;
     console.log('You\'re preferred order of colors is:');
-    console.log(answers.colors.map(function(color) {
+    console.log(answer.map(function(color) {
       return colors[color](color);
     }).join('\n'));
   })

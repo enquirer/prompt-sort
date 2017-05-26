@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "homepage": "https://github.com/enquirer/prompt-sort",
   "author": "Brian Woodward (https://github.com/doowb)",
+  "contributors": [
+    "Brian Woodward (https://twitter.com/doowb)",
+    "Jon Schlinkert (http://twitter.com/jonschlinkert)"
+  ],
   "repository": "enquirer/prompt-sort",
   "bugs": {
     "url": "https://github.com/enquirer/prompt-sort/issues"
@@ -20,16 +24,13 @@
     "test": "mocha"
   },
   "dependencies": {
-    "ansi-bold": "^0.1.1",
     "ansi-cyan": "^0.1.1",
-    "is-number": "^3.0.0",
-    "is-windows": "^1.0.1",
-    "prompt-list": "^0.2.0",
-    "readline-utils": "^0.1.5",
-    "terminal-paginator": "^0.2.1"
+    "arr-swap": "^1.0.1",
+    "debug": "^2.6.8",
+    "prompt-list": "^2.0.0"
   },
   "devDependencies": {
-    "ansi-colors": "^0.1.0",
+    "ansi-colors": "^0.2.0",
     "enquirer": "^0.4.1",
     "gulp-format-md": "^0.1.12"
   },
@@ -52,8 +53,8 @@
     "relates": {
       "list": [
         "enquirer",
-        "prompt-radio",
-        "prompt-checkbox"
+        "prompt-checkbox",
+        "prompt-radio"
       ]
     }
   }
