@@ -10,47 +10,41 @@
 var debug = require('debug')('prompt-sort');
 var List = require('prompt-list');
 var cyan = require('ansi-cyan');
-var swap = require('arr-swap');
 
 /**
  * Create a new prompt:
  *
  * ```js
  * var Prompt = require('prompt-sort');
- * var prompt([
- *   {
- *     type: 'sort',
- *     name: 'menu',
- *     message: 'Sort the menu items in the order you prefer.',
- *     choices: [
- *       'Home',
- *       new inquirer.Seperator(),
- *       'About',
- *       'FAQ'
- *     ]
- *   }
- * ], function(answers) {
- *   console.log(JSON.stringify(answers, null, 2));
+ * var prompt = new Prompt({
+ *   name: 'colors',
+ *   message: 'Sort colors from most to least favorite',
+ *   choices: [
+ *     'green',
+ *     'red',
+ *     'yellow'
+ *   ]
  * });
  *
- * // results in:
- * // {
- * //   "menu": [
- * //     "Home",
- * //     "------------",
- * //     "About",
- * //     "FAQ"
- * //   ]
- * // }
+ * prompt.run()
+ *   .then(function(answer) {
+ *     console.log(answer);
+ *   })
  * ```
  */
 
 function Prompt() {
   debug('initializing from <%s>', __filename);
   List.apply(this, arguments);
-  this.options.expandHeight = false;
+  // disable "expand" behavior on up/down keypresses
+  this.options.expandChoices = false;
   this.choices.check();
-  this.overrideActions();
+  this.action('space', function(pos) {
+    return pos;
+  });
+  this.action('number', function(pos) {
+    return pos;
+  });
 }
 
 /**
@@ -60,66 +54,16 @@ function Prompt() {
 List.extend(Prompt);
 
 /**
- * Override built-in actions methods
+ * Override built-in `.renderAnswer` method
  */
-
-Prompt.prototype.overrideActions = function() {
-  var down = this.actions.down;
-  var up = this.actions.up;
-
-  this.choices.swap = function(a, b) {
-    var choices = this.choices.slice();
-    this.keymap = {};
-    this.choices = [];
-    this.items = [];
-    this.keys = [];
-    this.addChoices(swap(choices, a, b));
-  };
-
-  this.action('up', function(pos, key) {
-    if (key && key.shift === true) {
-      this.moveUp(this.position(pos));
-    }
-    return up.call(this, pos, key);
-  });
-
-  this.action('down', function(pos, key) {
-    if (key && key.shift === true) {
-      this.moveDown(this.position(pos));
-    }
-    return down.call(this, pos, key);
-  });
-
-  /**
-   * Move the currently selected item up.
-   */
-
-  this.action('moveUp', function(pos) {
-    var len = this.choices.length;
-    if (pos > 0) {
-      this.choices.swap(pos - 1, pos);
-      return;
-    }
-    this.choices.swap(pos, len - 1);
-  });
-
-  /**
-   * Move the currently selected item down.
-   */
-
-  this.action('moveDown', function(pos) {
-    var len = this.choices.length;
-    if (pos < len - 1) {
-      this.choices.swap(pos + 1, pos);
-      return;
-    }
-    this.choices.swap(pos, 0);
-  });
-};
 
 Prompt.prototype.renderAnswer = function() {
   return cyan(this.choices.checked.join(', '));
 };
+
+/**
+ * Override built-in `.getAnswer` method
+ */
 
 Prompt.prototype.getAnswer = function() {
   return this.choices.checked;
